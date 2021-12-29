@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from "react";
+import "./App.css";
+//import { SwipeEventListener } from "swipe-event-listener";
 
-function App() {
+const App = () => {
+  const [state, setstate] = useState(false);
+  const ulRef = useRef();
+  // const { swipeArea } = SwipeEventListener({
+  //   swipeArea: document.querySelector("header"),
+  // });
+  // swipeArea.addEventListener("swipeRight", () => {
+  //   console.log("swipe right");
+  //   setstate(true);
+  // });
+  const handle = () => {
+    console.log(ulRef);
+    setstate(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <header className="container">
+      <img src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="" />
+      <nav id="navbar">
+        <ul
+          draggable={true}
+          className={state ? "ul" : ""}
+          ref={ulRef}
+          onDrag={handle}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <li>Home</li>
+          <li>About</li>
+        </ul>
+      </nav>
+    </header>
   );
-}
+};
 
 export default App;
